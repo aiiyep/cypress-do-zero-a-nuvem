@@ -223,4 +223,54 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         expect(input[0].files[0].name).to.equal('example.json')
       })
   })
+
+  Cypress._.times(5, () => {
+    it('pausando o tempo e depois avançando 3 segundos', () => {
+        cy.clock()
+
+        cy.fillMandatoryFieldsAndSubmit()
+        cy.contains('.success', 'Mensagem enviada com sucesso.').should('be.visible', 'Mensagem enviada com sucesso.')
+
+        cy.tick(3000)
+        
+        cy.contains('.success', 'Mensagem enviada com sucesso.').should('not.be.visible', 'Mensagem enviada com sucesso.')
+
+    })
+  })
+
+  it('exibe e oculta as mensagens de sucesso e erro usando .invoke()', () =>{
+    cy.get('.success')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Mensagem enviada com sucesso.')
+      .invoke('hide')
+      .should('not.be.visible')
+    cy.get('.error')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Valide os campos obrigatórios!')
+      .invoke('hide')
+      .should('not.be.visible')
+  })
+
+  it('preenche o campo da área de texto usando o comando invoke', () =>{
+    cy.get('#open-text-area')
+      .invoke('val', 'FODA PRA KRL')
+      .should('have.value', 'FODA PRA KRL')
+  })
+
+  it.only('faz uma requisição HTTP', ()=>{
+
+    cy.request({
+      method: 'GET',
+      url: 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
+    }).then((getRequest) =>{
+        expect(getRequest.status).to.equal(200);
+        expect(getRequest.statusText).to.equal('OK');
+        expect(getRequest.body).contains('h1', 'CAC TAT')
+    })
+  })
+  
 })
