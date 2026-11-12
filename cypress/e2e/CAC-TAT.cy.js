@@ -261,7 +261,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .should('have.value', 'FODA PRA KRL')
   })
 
-  it.only('faz uma requisição HTTP', ()=>{
+  it('faz uma requisição HTTP', ()=>{
 
     cy.request({
       method: 'GET',
@@ -271,6 +271,16 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         expect(getRequest.statusText).to.equal('OK');
         expect(getRequest.body).contains('h1', 'CAC TAT')
     })
+  })
+
+  it('Expondo o gato', () =>{
+    cy.get('#cat')
+      .invoke('show')
+      .should('be.visible')
+
+    cy.get('#cat')
+      .invoke('hide')
+      .should('not.be.visible')
   })
   
 })
