@@ -29,7 +29,7 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit', (data =
     firstName: 'Caio',
     lastName: 'Marques',
     email: 'caio@gmail.com',
-    text: 'Fodaaa@'
+    text: 'Teste de mensagem.'
  }) => {
   cy.get('#firstName')
     .type(data.firstName)
