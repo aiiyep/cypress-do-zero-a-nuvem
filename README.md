@@ -1,28 +1,56 @@
-# 🌲 Cypress, do Zero à Nuvem ☁️
+🌲 Cypress, do Zero à Nuvem ☁️
+![Cypress](https://img.shields.io/badge/Cypress-16-17202C?logo=cypress&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+Projeto de testes automatizados end-to-end (E2E) com Cypress, feito durante o curso "Cypress, do Zero à Nuvem" da Escola Talking About Testing.
+A aplicação testada é a CAC TAT (Central de Atendimento ao Cliente TAT), um formulário web de contato que está na pasta `src/`.
+🎯 O que foi testado
+A suíte em `cypress/e2e/CAC-TAT.cy.js` cobre:
+Envio do formulário: envio com sucesso preenchendo os campos obrigatórios, e mensagens de erro quando faltam campos obrigatórios ou o e-mail tem formato inválido
+Regras de negócio: o telefone passa a ser obrigatório quando o usuário escolhe esse meio de contato, e o campo de telefone não aceita valores não numéricos
+Elementos de formulário: campos de texto, listas suspensas (`select`) por texto, valor e índice, botões de rádio e checkboxes
+Upload de arquivos: seleção normal, simulação de drag-and-drop e uso de fixture com alias
+Controle do tempo: uso de `cy.clock()` e `cy.tick()` para verificar que as mensagens somem depois de 3 segundos, com o teste repetido 5 vezes via `Cypress._.times()`
+Manipulação do DOM: uso de `.invoke()` para exibir e ocultar elementos e preencher a área de texto
+Requisição HTTP: validação de status e resposta com `cy.request()`
+🛠️ Técnicas e boas práticas
+Comando customizado: `cy.fillMandatoryFieldsAndSubmit()` em `cypress/support/commands.js`, que evita repetir código
+Fixtures para os arquivos de teste
+Integração contínua: os testes rodam automaticamente com GitHub Actions a cada `push` (`.github/workflows/ci.yml`)
+Cypress Cloud: os resultados das execuções do CI são gravados na nuvem
+✅ Pré-requisitos
+Node.js (versão LTS recomendada)
+npm (vem junto com o Node.js)
+Git
+🚀 Como rodar os testes
+```bash
+# 1. Clone o repositório
+git clone https://github.com/aiiyep/cypress-do-zero-a-nuvem.git
+cd cypress-do-zero-a-nuvem
 
-👋 Seja bem-vindo(a)!
+# 2. Instale as dependências
+npm install
 
-É muito bom tê-lo(a) aqui. Tenho certeza que você vai amar esse curso. ❤️
+# 3a. Abra o Cypress no modo interativo
+npm run cy:open
 
-## O que você vai aprender?
-
-- Como configurar um projeto Cypress do zero
-- Como visitar páginas locais e remotas
-- Como lidar com os elementos mais comuns encontrados em aplicações web
-- Como testar upload de arquivos
-- Como realizar as mais diversas verificações de resultados esperados
-- Como criar comandos customizados
-- Como lidar com links que abrem em outra aba do navegador
-- Como rodar testes simulando as dimensões de um dispositivo móvel
-- Como resolver os mesmos problemas de diferentes formas, conhecendo a [API do Cypress](https://docs.cypress.io/api/table-of-contents)
-- Como criar uma documentação mínima para seu projeto de testes automatizados
-- Como executar os testes em um _workflow_ de integração contínua sempre que mudanças ocorrerem no código da aplicação (ou dos testes)
-- Como integrar seu _workflow_ de integração contínua com o Cypress Cloud (o serviço de gestão de testes do Cypress na nuvem)
-
-## Vamos começar?
-
-Vá para a seção [estrutura do curso](./lessons/_course-structure_.md).
-
-___
-
-Este é um curso da **Escola Talking About Testing**.
+# 3b. Ou rode os testes em modo headless (terminal)
+npm test
+```
+> O script `npm run test:cloud` grava a execução no Cypress Cloud. Para usá-lo, é preciso ter a variável `CYPRESS_RECORD_KEY` configurada.
+📁 Estrutura do projeto
+```
+├── .github/workflows/ci.yml   # Pipeline de CI no GitHub Actions
+├── cypress/
+│   ├── e2e/CAC-TAT.cy.js      # Casos de teste
+│   ├── fixtures/              # Arquivos usados nos testes
+│   └── support/commands.js    # Comandos customizados
+├── src/                       # Aplicação testada (CAC TAT)
+└── cypress.config.js          # Configuração do Cypress
+```
+👤 Autor
+Gabriel Gonçalves Lima, estudante de Sistemas de Informação com foco em QA e automação de testes.
+![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)
+---
+Projeto baseado no curso de Walmyr Lima e Silva Filho, da Escola Talking About Testing, distribuído sob a licença MIT.
