@@ -1,5 +1,6 @@
 # 🌲 Cypress, do Zero à Nuvem ☁️
 
+[![End-to-end tests](https://github.com/aiiyep/cypress-do-zero-a-nuvem/actions/workflows/ci.yml/badge.svg)](https://github.com/aiiyep/cypress-do-zero-a-nuvem/actions/workflows/ci.yml)
 ![Cypress](https://img.shields.io/badge/Cypress-16-17202C?logo=cypress&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 ![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
@@ -10,7 +11,7 @@ A aplicação testada é a **CAC TAT (Central de Atendimento ao Cliente TAT)**, 
 
 ## 🎯 O que foi testado
 
-A suíte em [`cypress/e2e/CAC-TAT.cy.js`](./cypress/e2e/CAC-TAT.cy.js) cobre:
+A suíte em [`cypress/e2e/CAC-TAT.cy.js`](./cypress/e2e/CAC-TAT.cy.js) tem **22 casos de teste** e cobre:
 
 - **Envio do formulário:** envio com sucesso preenchendo os campos obrigatórios, e mensagens de erro quando faltam campos obrigatórios ou o e-mail tem formato inválido
 - **Regras de negócio:** o telefone passa a ser obrigatório quando o usuário escolhe esse meio de contato, e o campo de telefone não aceita valores não numéricos
